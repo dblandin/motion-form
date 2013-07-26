@@ -9,49 +9,50 @@ module MotionForm
       end
     end
 
-    def input(name, options = {})
-      name = name.to_s.gsub('_', ' ').titleize
-
-      rows << TextFieldRow.new(name, options)
+    def section
+      MotionForm::Section.new.tap do |section|
+        sections << section
+      end
     end
 
-    def button(name, options = {})
-      name = name.to_s.gsub('_', ' ').titleize
-
-      rows << ButtonRow.new(name, options)
+    def sections
+      @sections ||= [MotionForm::Section.new]
     end
 
-    def rows
-      @_rows ||= []
+    def input(key, options = {})
+      sections.first.input(key, options)
+    end
+
+    def button(key, options = {})
+      sections.first.button(key, options)
     end
 
     def register_cells
-      registerClass(TextFieldCell, forCellReuseIdentifier: TextFieldCell::IDENTIFIER)
-      registerClass(ButtonCell, forCellReuseIdentifier: ButtonCell::IDENTIFIER)
+      MotionForm.registered_cells.each do |klass|
+        registerClass(klass, forCellReuseIdentifier: klass::IDENTIFIER)
+      end
     end
 
     def numberOfSectionsInTableView(table_view)
-      1
+      sections.count
     end
 
     def tableView(table_view, numberOfRowsInSection: section)
-      rows.count
+      sections[section].rows.count
+    end
+
+    def rows
+      sections.first.rows
     end
 
     def tableView(table_view, cellForRowAtIndexPath: index_path)
-      row = rows[index_path.row]
+      section = sections[index_path.section]
+      row     = section.rows[index_path.row]
 
       table_view.dequeueReusableCellWithIdentifier(row.cell_identifier).tap do |cell|
         cell.label = row.name
         cell.icon  = row.icon
-        cell.accessory = row.accessory if cell.is_a? ButtonCell
-
-        row.cell = cell unless cell.is_a? ButtonCell
       end
-    end
-
-    def render
-      'rendering'
     end
   end
 end

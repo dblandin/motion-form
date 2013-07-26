@@ -18,7 +18,7 @@ class TextFieldCell < UITableViewCell
   end
 
   def text_field
-    @_text_field ||= UITextField.alloc.init.tap do |field|
+    @text_field ||= UITextField.alloc.init.tap do |field|
       field.autocorrectionType       = UITextAutocorrectionTypeNo
       field.autoresizingMask         = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight
       field.backgroundColor          = UIColor.clearColor
@@ -31,7 +31,7 @@ class TextFieldCell < UITableViewCell
   end
 
   def left_view
-    @_left_view ||= IconView.alloc.init
+    @left_view ||= IconView.alloc.init
   end
 
   def layoutSubviews

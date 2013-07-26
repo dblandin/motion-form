@@ -6,6 +6,7 @@ class ViewController < UIViewController
 
     form = MotionForm.form_for(view) do |f|
       f.frame = view.bounds
+
       f.input :name,      icon: :contact
       f.input :username,  icon: :user
       f.input :pinterest, icon: :pinterest
@@ -15,9 +16,8 @@ class ViewController < UIViewController
 
       f.button :change_password, icon: :lock, accessory: :forward_arrow
       f.button :change_email,    icon: :email, accessory: :forward_arrow
-      f
     end
 
-    p form.render
+    p form
   end
 end

@@ -4,7 +4,6 @@ class IconView < UILabel
   def init
     super.tap do |view|
       view.font            = MotionForm.icon_font
-
       view.backgroundColor = UIColor.clearColor
       view.textColor       = UIColor.grayColor
       view.textAlignment   = NSTextAlignmentCenter
@@ -26,10 +25,7 @@ class IconView < UILabel
   end
 
   def icon_mappings
-    @_icon_mappings ||= begin
-
-      BW::JSON.parse(json_data.to_str)
-    end
+    @_icon_mappings ||= BW::JSON.parse(json_data.to_str)
   end
 
   def json_data

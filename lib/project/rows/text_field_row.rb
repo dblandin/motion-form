@@ -1,13 +1,17 @@
 class TextFieldRow
-  attr_accessor :name, :options, :cell
+  attr_accessor :key, :options, :cell
 
-  def initialize(name, options)
-    self.name    = name
+  def initialize(key, options)
+    self.key    = key
     self.options = options
   end
 
   def cell_identifier
     TextFieldCell::IDENTIFIER
+  end
+
+  def name
+    key.to_s.titleize
   end
 
   def icon

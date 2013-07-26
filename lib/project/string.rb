@@ -1,5 +1,5 @@
 class String
   def titleize
-    split(/(\W)/).map(&:capitalize).join
+    gsub('_', ' ').split(/(\W)/).map(&:capitalize).join
   end
 end
