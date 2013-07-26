@@ -1,6 +1,6 @@
 class ButtonRow < TextFieldRow
-  def cell_identifier
-    ButtonCell::IDENTIFIER
+  def cell_type
+    ButtonCell
   end
 
   def accessory

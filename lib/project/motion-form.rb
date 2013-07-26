@@ -9,7 +9,9 @@ module MotionForm
     def form_for(view)
       MotionForm::Base.new.tap do |form|
 
-        yield form
+        yield form if block_given?
+
+        form.frame = view.bounds
 
         view.addSubview(form)
       end

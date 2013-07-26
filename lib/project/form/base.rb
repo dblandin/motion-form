@@ -12,11 +12,13 @@ module MotionForm
     def section
       MotionForm::Section.new.tap do |section|
         sections << section
+
+        yield section
       end
     end
 
     def sections
-      @sections ||= [MotionForm::Section.new]
+      @sections ||= [ MotionForm::Section.new ]
     end
 
     def input(key, options = {})
@@ -37,12 +39,17 @@ module MotionForm
       sections.count
     end
 
-    def tableView(table_view, numberOfRowsInSection: section)
-      sections[section].rows.count
+    def tableView(table_view, numberOfRowsInSection: section_index)
+      sections[section_index].rows.count
+    end
+
+    def tableView(table_view, didSelectRowAtIndexPath: index_path)
+      section = sections[index_path.section]
+      row     = section.rows[index_path.row]
     end
 
     def rows
-      sections.first.rows
+      sections.map(&:rows).flatten
     end
 
     def tableView(table_view, cellForRowAtIndexPath: index_path)
@@ -50,9 +57,20 @@ module MotionForm
       row     = section.rows[index_path.row]
 
       table_view.dequeueReusableCellWithIdentifier(row.cell_identifier).tap do |cell|
-        cell.label = row.name
-        cell.icon  = row.icon
+        row.update_cell(cell)
       end
+    end
+
+    def render
+      Hash[render_values]
+    end
+
+    def render_values
+      value_rows.map { |row| [row.key, row.value] }
+    end
+
+    def value_rows
+      rows.select { |row| row.has_value? }
     end
   end
 end

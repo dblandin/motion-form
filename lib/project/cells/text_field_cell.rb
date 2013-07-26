@@ -1,11 +1,9 @@
-class TextFieldCell < UITableViewCell
+class TextFieldCell < BaseCell
   IDENTIFIER = 'TextFieldCell'
 
-  def initWithStyle(style, reuseIdentifier: reuse_identifier)
-    super.tap do |cell|
-      cell.selectionStyle = UITableViewCellSelectionStyleNone
-
-      cell.contentView.addSubview(text_field)
+  class << self
+    def has_value?
+      true
     end
   end
 

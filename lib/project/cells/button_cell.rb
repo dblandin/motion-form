@@ -1,6 +1,12 @@
 class ButtonCell < TextFieldCell
   IDENTIFIER = 'ButtonCell'
 
+  class << self
+    def has_value?
+      false
+    end
+  end
+
   def initWithStyle(style, reuseIdentifier: reuse_identifier)
     super.tap do |cell|
       cell.selectionStyle     = UITableViewCellSelectionStyleGray

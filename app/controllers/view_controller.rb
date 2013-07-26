@@ -1,4 +1,4 @@
-class ViewController < UIViewController
+class FormController < UIViewController
   def viewDidLoad
     super
 
@@ -7,17 +7,23 @@ class ViewController < UIViewController
     form = MotionForm.form_for(view) do |f|
       f.frame = view.bounds
 
-      f.input :name,      icon: :contact
-      f.input :username,  icon: :user
-      f.input :pinterest, icon: :pinterest
-      f.input :twitter,   icon: :twitter
-      f.input :website,   icon: :website
-      f.input :bio,       icon: :info
+      f.section do |section|
+        section.input :name,      icon: :contact
+        section.input :username,  icon: :user
+        section.input :pinterest, icon: :pinterest
+        section.input :twitter,   icon: :twitter
+        section.input :website,   icon: :website
+        section.input :bio,       icon: :info
+      end
 
-      f.button :change_password, icon: :lock, accessory: :forward_arrow
-      f.button :change_email,    icon: :email, accessory: :forward_arrow
+      f.section do |section|
+        section.button :change_password, icon: :lock, action: notify_action
+        section.button :change_email,    icon: :email, action: notify_action
+      end
     end
+  end
 
-    p form
+  def notify_action
+    lambda { p 'action' }
   end
 end

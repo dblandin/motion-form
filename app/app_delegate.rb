@@ -1,5 +1,5 @@
 class AppDelegate
-  attr_accessor :window
+  attr_accessor :window, :form
 
   def application(application, didFinishLaunchingWithOptions: launch_options)
     return true if RUBYMOTION_ENV == 'test'
@@ -18,7 +18,7 @@ class AppDelegate
   def initialize_main_controller
     self.window = UIWindow.alloc.initWithFrame(UIScreen.mainScreen.bounds)
 
-    window.setRootViewController(ViewController.alloc.init)
+    window.setRootViewController(FormController.alloc.init)
 
     window.makeKeyAndVisible
   end
