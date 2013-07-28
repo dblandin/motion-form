@@ -25,6 +25,7 @@ class TextFieldCell < BaseCell
       field.leftView                 = left_view
       field.leftViewMode             = UITextFieldViewModeAlways
       field.textColor                = UIColor.grayColor
+      field.delegate = self
     end
   end
 
@@ -32,8 +33,26 @@ class TextFieldCell < BaseCell
     @left_view ||= IconView.alloc.init
   end
 
+  def value
+    text_field.text
+  end
+
   def layoutSubviews
     text_field.frame = [[10, 0], [300, 43]]
     left_view.frame  = [[0, 0], [36, 43]]
+  end
+
+  def textFieldDidBeginEditing(text_field)
+    post('FormCellDidBeginEditing')
+  end
+
+  def textFieldDidEndEditing(text_field)
+    post('FormCellDidEndEditing')
+  end
+
+  def textFieldShouldReturn(text_field)
+    text_field.resignFirstResponder
+
+    true
   end
 end

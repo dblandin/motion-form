@@ -27,5 +27,8 @@ describe MotionForm::FormController do
     views(MotionForm::Base).should.not.be.nil
 
     view('Name').should.not.be.nil
+    tap('Name')
+    views(UITextField).first.text = 'Devon Blandin'
+    views(UITextField).first.resignFirstResponder
   end
 end
