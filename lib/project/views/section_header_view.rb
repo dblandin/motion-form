@@ -11,7 +11,7 @@ class SectionHeaderView < UIView
 
   def section_title
     @section_title ||= PaddedLabel.alloc.initWithFrame(bounds).tap do |label|
-      label.padding = 5
+      label.padding = 10
       label.backgroundColor = UIColor.redColor
       label.adjustsFontSizeToFitWidth = true
       label.textColor = UIColor.whiteColor

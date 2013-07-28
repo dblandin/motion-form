@@ -8,6 +8,12 @@ class TextFieldRow
 
     @icon  = options.fetch(:icon, nil)
     @value = options.fetch(:value, nil)
+
+    listen_to_notifications
+  end
+
+  def dealloc
+    remove_all_observers
   end
 
   def listen_to_notifications
@@ -17,14 +23,6 @@ class TextFieldRow
 
   def observers
     @observers ||= []
-  end
-
-  def viewDidAppear(animated)
-    listen_to_notifications
-  end
-
-  def viewWillDisappear(animated)
-    remove_all_observers
   end
 
   def remove_all_observers

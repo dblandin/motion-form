@@ -7,7 +7,7 @@ class FormController < UIViewController
     form = MotionForm.form_for(view) do |f|
       f.frame = view.bounds
 
-      f.section do |section|
+      f.section 'Profile' do |section|
         section.input :name,      icon: :contact
         section.input :username,  icon: :user
         section.input :pinterest, icon: :pinterest
@@ -18,7 +18,7 @@ class FormController < UIViewController
 
       f.section 'Account' do |section|
         section.button :change_password, icon: :lock, action: notify_action
-        section.button :change_email,    icon: :email, action: notify_action
+        section.button :change_email, icon: :email, action: notify_action
       end
     end
   end

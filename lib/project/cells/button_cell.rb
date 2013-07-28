@@ -13,7 +13,20 @@ class ButtonCell < TextFieldCell
       cell.text_field.enabled = false
 
       cell.add_right_view
+      cell.add_tap_recognizer
     end
+  end
+
+  def add_tap_recognizer
+    addGestureRecognizer(tap_recognizer)
+  end
+
+  def tap_recognizer
+    UITapGestureRecognizer.alloc.initWithTarget(self, action: 'tapped:')
+  end
+
+  def tapped(recognizer)
+    post('FormCellWasTapped')
   end
 
   def add_right_view
