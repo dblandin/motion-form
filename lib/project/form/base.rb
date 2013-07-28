@@ -1,7 +1,7 @@
 module MotionForm
   class Base < UITableView
     def init
-      initWithFrame(frame, style: UITableViewStyleGrouped).tap do |f|
+      initWithFrame(frame, style: UITableViewStylePlain).tap do |f|
         f.register_cells
 
         f.dataSource = self
@@ -9,24 +9,20 @@ module MotionForm
       end
     end
 
-    def section
-      MotionForm::Section.new.tap do |section|
-        sections << section
-
+    def section(title = '')
+      build_section(title).tap do |section|
         yield section
       end
     end
 
+    def build_section(title)
+      MotionForm::Section.new(title).tap do |section|
+        sections << section
+      end
+    end
+
     def sections
-      @sections ||= [ MotionForm::Section.new ]
-    end
-
-    def input(key, options = {})
-      sections.first.input(key, options)
-    end
-
-    def button(key, options = {})
-      sections.first.button(key, options)
+      @sections ||= []
     end
 
     def register_cells
@@ -46,6 +42,26 @@ module MotionForm
     def tableView(table_view, didSelectRowAtIndexPath: index_path)
       section = sections[index_path.section]
       row     = section.rows[index_path.row]
+    end
+
+    def tableView(table_view, viewForHeaderInSection: section)
+      unless sections[section].title.blank?
+        SectionHeaderView.alloc.initWithFrame([[0, 0], [size.width, 44.0]]).tap do |header|
+          header.text = table_view.tableView(table_view, titleForHeaderInSection: section)
+        end
+      end
+    end
+
+    def tableView(table_view, titleForHeaderInSection: section)
+      sections[section].title
+    end
+
+    def tableView(table_view, heightForHeaderInSection: section)
+      if sections[section].title.blank?
+        0.0
+      else
+        44.0
+      end
     end
 
     def rows

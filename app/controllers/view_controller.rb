@@ -16,7 +16,7 @@ class FormController < UIViewController
         section.input :bio,       icon: :info
       end
 
-      f.section do |section|
+      f.section 'Account' do |section|
         section.button :change_password, icon: :lock, action: notify_action
         section.button :change_email,    icon: :email, action: notify_action
       end

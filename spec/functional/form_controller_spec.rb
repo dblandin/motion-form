@@ -12,7 +12,9 @@ module MotionForm
 
     def setup_form
       @form = MotionForm.form_for(view) do |f|
-        f.input :name
+        f.section do |section|
+          section.input :name
+        end
       end
     end
   end

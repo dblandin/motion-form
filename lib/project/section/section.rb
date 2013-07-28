@@ -1,5 +1,11 @@
 class MotionForm
   class Section
+    attr_reader :title
+
+    def initialize(title = '')
+      @title = title
+    end
+
     def input(key, options = {})
       rows << TextFieldRow.new(key, options)
     end
