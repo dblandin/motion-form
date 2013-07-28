@@ -18,8 +18,17 @@ class AppDelegate
   def initialize_main_controller
     self.window = UIWindow.alloc.initWithFrame(UIScreen.mainScreen.bounds)
 
-    window.setRootViewController(FormController.alloc.init)
+    window.setRootViewController(nav_controller)
 
     window.makeKeyAndVisible
+  end
+
+  def nav_controller
+    UINavigationController.alloc.initWithRootViewController(form_controller).tap do |controller|
+    end
+  end
+
+  def form_controller
+    FormController.alloc.init
   end
 end

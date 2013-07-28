@@ -3,6 +3,7 @@ module MotionForm
     def init
       initWithFrame(frame, style: UITableViewStylePlain).tap do |f|
         f.register_cells
+        f.separatorStyle = UITableViewCellSeparatorStyleNone
 
         f.dataSource = self
         f.delegate   = self

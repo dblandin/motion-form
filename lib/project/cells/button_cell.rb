@@ -43,6 +43,6 @@ class ButtonCell < TextFieldCell
   def layoutSubviews
     super
 
-    right_view.frame = [[270, 0], [36, 43]]
+    right_view.frame = [[size.width - 56, 0], [36, 43]]
   end
 end

@@ -3,10 +3,9 @@ class FormController < UIViewController
     super
 
     view.backgroundColor = UIColor.whiteColor
+    self.title = 'Settings'
 
     form = MotionForm.form_for(view) do |f|
-      f.frame = view.bounds
-
       f.section 'Profile' do |section|
         section.input :name,      icon: :contact
         section.input :username,  icon: :user
@@ -24,6 +23,10 @@ class FormController < UIViewController
   end
 
   def notify_action
-    lambda { p 'action' }
+    lambda { navigationController.pushViewController(password_controller, animated: true) }
+  end
+
+  def password_controller
+    PasswordController.alloc.init
   end
 end

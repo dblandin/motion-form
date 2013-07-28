@@ -11,6 +11,13 @@ class BaseCell < UITableViewCell
     super.tap do |cell|
       cell.selectionStyle = UITableViewCellSelectionStyleNone
       cell.contentView.addSubview(text_field)
+      cell.selectedBackgroundView = selected_background_view
+    end
+  end
+
+  def selected_background_view
+    UIView.alloc.initWithFrame(bounds).tap do |view|
+      view.backgroundColor = 'FFCDCB'.to_color
     end
   end
 

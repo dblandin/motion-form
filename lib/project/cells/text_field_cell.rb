@@ -25,6 +25,7 @@ class TextFieldCell < BaseCell
       field.leftView                 = left_view
       field.leftViewMode             = UITextFieldViewModeAlways
       field.textColor                = UIColor.grayColor
+
       field.delegate = self
     end
   end
