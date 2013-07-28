@@ -6,6 +6,8 @@ motion-form is heavily inspired by the gem simple_form for Rails.
 
 It aims to bring a simple, yet flexible DSL to the tedious task of creating iOS forms.
 
+![Screenshot](https://github.com/dblandin/motion-form/blob/master/img/screenshot.png?raw=true)
+
 ## Usage
 
 ```ruby
