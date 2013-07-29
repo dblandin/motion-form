@@ -26,6 +26,6 @@ class BaseCell < UITableViewCell
   end
 
   def post(notification)
-    notification_center.postNotificationName(notification, object: self, userInfo: { key: key, value: value })
+    notification_center.postNotificationName(notification, object: self, userInfo: notification_payload)
   end
 end

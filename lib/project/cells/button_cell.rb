@@ -45,4 +45,8 @@ class ButtonCell < TextFieldCell
 
     right_view.frame = [[size.width - 56, 0], [36, 43]]
   end
+
+  def notification_payload
+    { key: key }
+  end
 end

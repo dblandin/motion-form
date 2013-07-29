@@ -7,6 +7,8 @@ module MotionForm
 
         f.dataSource = self
         f.delegate   = self
+
+        @keyboard_avoiding_delegate = KeyboardAvoidingDelegate.new(f)
       end
     end
 

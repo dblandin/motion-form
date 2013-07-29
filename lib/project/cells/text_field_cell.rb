@@ -56,4 +56,8 @@ class TextFieldCell < BaseCell
 
     true
   end
+
+  def notification_payload
+    { key: key, value: value, text_field: text_field }
+  end
 end
