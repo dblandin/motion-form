@@ -1,5 +1,7 @@
 module MotionForm
   class Base < UITableView
+    attr_reader :keyboard_avoiding_delegate
+
     def init
       initWithFrame(frame, style: UITableViewStylePlain).tap do |f|
         f.register_cells
@@ -8,8 +10,34 @@ module MotionForm
         f.dataSource = self
         f.delegate   = self
 
-        @keyboard_avoiding_delegate = KeyboardAvoidingDelegate.new(f)
+        @keyboard_avoiding_delegate = Motion::KeyboardAvoiding.new(f)
+        listen
       end
+    end
+
+    def listen
+      observers << notification_center.addObserver(self, selector: 'did_begin_editing:', name: 'FormCellDidBeginEditing', object: nil)
+      observers << notification_center.addObserver(self, selector: 'did_end_editing:', name: 'FormCellDidEndEditing', object: nil)
+    end
+
+    def did_begin_editing(notification)
+      unless window.nil?
+        keyboard_avoiding_delegate.textFieldDidBeginEditing(notification.userInfo[:text_field])
+      end
+    end
+
+    def did_end_editing(notification)
+      unless window.nil?
+        keyboard_avoiding_delegate.textFieldDidEndEditing(notification.userInfo[:text_field])
+      end
+    end
+
+    def observers
+      @observers ||= []
+    end
+
+    def notification_center
+      NSNotificationCenter.defaultCenter
     end
 
     def section(title = '')

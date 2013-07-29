@@ -4,7 +4,7 @@ class PasswordController < UIViewController
 
     view.backgroundColor = UIColor.whiteColor
 
-    form = MotionForm.form_for(view) do |f|
+    @form = MotionForm.form_for(view) do |f|
       f.section 'Change Password' do |section|
         section.input :password, icon: :lock
         section.input :password_confirmation, icon: :lock

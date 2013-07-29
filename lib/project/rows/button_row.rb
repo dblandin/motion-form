@@ -15,7 +15,7 @@ class ButtonRow < TextFieldRow
     options.fetch(:accessory, nil)
   end
 
-  def listen_to_notifications
+  def listen
     observers << notification_center.addObserver(self, selector: 'tapped:', name: 'FormCellWasTapped', object: nil)
   end
 
