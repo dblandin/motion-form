@@ -1,3 +1,6 @@
+motion_require './base_cell'
+motion_require '../views/icon_view'
+
 class TextFieldCell < BaseCell
   IDENTIFIER = 'TextFieldCell'
 

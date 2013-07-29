@@ -1,3 +1,5 @@
+motion_require './padded_label'
+
 class SectionHeaderView < UIView
   def initWithFrame(frame)
     super.tap do |view|

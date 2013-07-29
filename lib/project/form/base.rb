@@ -1,3 +1,5 @@
+motion_require '../views/section_header_view'
+
 module MotionForm
   class Base < UITableView
     attr_reader :keyboard_avoiding_delegate

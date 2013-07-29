@@ -1,3 +1,5 @@
+motion_require './text_field_cell'
+
 class ButtonCell < TextFieldCell
   IDENTIFIER = 'ButtonCell'
 

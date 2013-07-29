@@ -1,3 +1,6 @@
+motion_require '../cells/button_cell'
+motion_require '../cells/text_field_cell'
+
 class MotionForm
   class Section
     attr_reader :title

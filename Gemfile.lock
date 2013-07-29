@@ -3,6 +3,7 @@ GEM
   specs:
     bubble-wrap (1.3.0)
     motion-keyboard-avoiding (0.0.1)
+    motion-require (0.0.7)
     rake (10.1.0)
 
 PLATFORMS
@@ -11,4 +12,5 @@ PLATFORMS
 DEPENDENCIES
   bubble-wrap
   motion-keyboard-avoiding (~> 0.0.1)
+  motion-require
   rake

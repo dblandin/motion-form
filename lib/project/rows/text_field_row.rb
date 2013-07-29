@@ -1,3 +1,6 @@
+motion_require './base_row'
+motion_require '../cells/text_field_cell'
+
 class TextFieldRow < BaseRow
   attr_accessor :value
 
