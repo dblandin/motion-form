@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 Gem::Specification.new do |spec|
   spec.name          = 'motion-form'
-  spec.version       = '0.0.4'
+  spec.version       = '0.0.5'
   spec.authors       = ['Devon Blandin']
   spec.email         = ['dblandin@gmail.com']
   spec.description   = %q{RubyMotion Forms made easy.}
@@ -17,7 +17,7 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ['lib']
 
-  spec.add_dependency 'motion-keyboard-avoiding'
+  spec.add_dependency 'motion-keyboard-avoiding', '~> 0.0.2'
   spec.add_dependency 'motion-require', '~> 0.0.3'
   spec.add_development_dependency 'rake'
 end
