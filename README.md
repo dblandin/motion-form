@@ -36,6 +36,16 @@ def push_password_controller
 end
 ```
 
+### Configuration
+
+```ruby
+MotionForm.config do |config|
+  config.icon_font                 = UIFont.fontWithName('dscovr', size: 14.0)
+  config.section_header_color      = UIColor.blueColor
+  config.section_header_text_color = UIColor.whiteColor
+end
+```
+
 ## Installation
 
 Add this line to your application's Gemfile:
