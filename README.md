@@ -13,7 +13,7 @@ It aims to bring a simple, yet flexible DSL to the tedious task of creating iOS 
 ```ruby
 form = MotionForm.form_for(view) do |f|
   f.section 'Profile' do |section|
-    section.input :name,      icon: :contact
+    section.input :name,      icon: :contact, value: 'David Copperfield'
     section.input :username,  icon: :user
     section.input :pinterest, icon: :pinterest
     section.input :twitter,   icon: :twitter
