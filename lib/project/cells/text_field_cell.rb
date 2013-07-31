@@ -14,6 +14,10 @@ class TextFieldCell < BaseCell
     text_field.placeholder = label
   end
 
+  def secure=(secure)
+    text_field.secureTextEntry = secure
+  end
+
   def icon=(icon)
     left_view.name = icon
   end

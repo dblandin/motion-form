@@ -24,8 +24,7 @@ class AppDelegate
   end
 
   def nav_controller
-    UINavigationController.alloc.initWithRootViewController(form_controller).tap do |controller|
-    end
+    UINavigationController.alloc.initWithRootViewController(form_controller)
   end
 
   def form_controller

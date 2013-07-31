@@ -25,7 +25,8 @@ class TextFieldRow < BaseRow
   def update_cell(cell)
     super
 
-    cell.value = options[:value]
+    cell.secure = options[:secure]
+    cell.value  = options[:value]
   end
 
   def cell_type
