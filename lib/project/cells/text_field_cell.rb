@@ -41,6 +41,10 @@ class TextFieldCell < BaseCell
     text_field.text
   end
 
+  def value=(value)
+    text_field.text = value
+  end
+
   def layoutSubviews
     text_field.frame = [[10, 0], [300, 43]]
     left_view.frame  = [[0, 0], [36, 43]]

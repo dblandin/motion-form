@@ -22,6 +22,12 @@ class TextFieldRow < BaseRow
     self.value = text_field.text
   end
 
+  def update_cell(cell)
+    super
+
+    cell.value = options[:value]
+  end
+
   def cell_type
     TextFieldCell
   end
