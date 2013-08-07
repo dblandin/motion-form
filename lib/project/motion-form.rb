@@ -37,11 +37,11 @@ module MotionForm
     end
 
     def section_header_color
-      @section_header_color || UIColor.redColor
+      @section_header_color || '#bac3c7'.to_color
     end
 
     def section_header_text_color
-      @section_header_text_color || UIColor.whiteColor
+      @section_header_text_color || '#eaf0f1'.to_color
     end
   end
 end
