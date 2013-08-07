@@ -23,7 +23,9 @@ class FormController < UIViewController
   end
 
   def notify_action
-    lambda { navigationController.pushViewController(password_controller, animated: true) }
+    lambda do
+      navigationController.pushViewController(password_controller, animated: true)
+    end
   end
 
   def password_controller

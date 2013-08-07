@@ -11,7 +11,7 @@ class TextFieldRow < BaseRow
   end
 
   def listen
-    observers << notification_center.addObserver(self, selector: 'did_end_editing:', name: 'FormCellDidEndEditing', object: nil)
+    observe('FormCellDidEndEditing', 'did_end_editing:')
   end
 
   def did_end_editing(notification)

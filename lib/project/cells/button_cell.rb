@@ -28,7 +28,7 @@ class ButtonCell < TextFieldCell
   end
 
   def tapped(recognizer)
-    post('FormCellWasTapped')
+    post('FormCellWasTapped', notification_payload)
   end
 
   def add_right_view

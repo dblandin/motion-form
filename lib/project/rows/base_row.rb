@@ -9,18 +9,20 @@ class BaseRow
     @value = options.fetch(:value, nil)
   end
 
-  def observers
-    @observers ||= []
-  end
-
-  def remove_all_observers
-    observers.each do |observer|
-      notification_center.removeObserver(observer)
-    end
-  end
-
   def notification_center
     NSNotificationCenter.defaultCenter
+  end
+
+  def post(notification)
+    notification_center.postNotificationName(notification, object: self, userInfo: nil)
+  end
+
+  def observe(notification_name, selector)
+    notification_center.addObserver(self, selector: selector, name: notification_name, object: nil)
+  end
+
+  def dealloc
+    notification_center.removeObserver(self)
   end
 
   def cell_identifier

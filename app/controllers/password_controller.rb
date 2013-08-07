@@ -1,4 +1,6 @@
 class PasswordController < UIViewController
+  attr_reader :form
+
   def viewDidLoad
     super
 
@@ -14,6 +16,8 @@ class PasswordController < UIViewController
   end
 
   def save
-    lambda { p 'saving password' }
+    lambda do
+      p 'saving password', form.render
+    end
   end
 end

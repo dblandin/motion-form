@@ -25,7 +25,15 @@ class BaseCell < UITableViewCell
     NSNotificationCenter.defaultCenter
   end
 
-  def post(notification)
-    notification_center.postNotificationName(notification, object: self, userInfo: notification_payload)
+  def post(notification, payload = nil)
+    notification_center.postNotificationName(notification, object: self, userInfo: payload)
+  end
+
+  def observe(notification_name, selector)
+    notification_center.addObserver(self, selector: selector, name: notification_name, object: nil)
+  end
+
+  def dealloc
+    notification_center.removeObserver(self)
   end
 end

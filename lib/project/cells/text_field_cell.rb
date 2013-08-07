@@ -4,10 +4,20 @@ motion_require '../views/icon_view'
 class TextFieldCell < BaseCell
   IDENTIFIER = 'TextFieldCell'
 
+  def initWithStyle(style, reuseIdentifier: reuse_identifier)
+    super.tap do |cell|
+      cell.observe('ButtonCallbackWillFire', 'resign_textfield:')
+    end
+  end
+
   class << self
     def has_value?
       true
     end
+  end
+
+  def resign_textfield(notification)
+    text_field.resignFirstResponder if text_field.isFirstResponder
   end
 
   def label=(label)
@@ -55,11 +65,11 @@ class TextFieldCell < BaseCell
   end
 
   def textFieldDidBeginEditing(text_field)
-    post('FormCellDidBeginEditing')
+    post('FormCellDidBeginEditing', notification_payload)
   end
 
   def textFieldDidEndEditing(text_field)
-    post('FormCellDidEndEditing')
+    post('FormCellDidEndEditing', notification_payload)
   end
 
   def textFieldShouldReturn(text_field)

@@ -19,11 +19,13 @@ class ButtonRow < TextFieldRow
   end
 
   def listen
-    observers << notification_center.addObserver(self, selector: 'tapped:', name: 'FormCellWasTapped', object: nil)
+    observe('FormCellWasTapped', 'tapped:')
   end
 
   def tapped(notification)
     if notification.userInfo[:key] == key
+      post('ButtonCallbackWillFire')
+
       on_tap_callback.call
     end
   end
