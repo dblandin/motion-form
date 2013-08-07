@@ -14,9 +14,17 @@ module MotionForm
 
         yield form if block_given?
 
-        form.frame = view.bounds
-
         view.addSubview(form)
+
+        %w(H V).each do |direction|
+          constraints = NSLayoutConstraint.constraintsWithVisualFormat(
+          "#{direction}:|[form]|",
+          options: 0,
+          metrics: nil,
+          views: { 'form' => form } )
+
+          view.addConstraints(constraints)
+        end
       end
     end
 
