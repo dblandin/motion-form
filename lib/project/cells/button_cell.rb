@@ -23,6 +23,16 @@ class ButtonCell < TextFieldCell
     addGestureRecognizer(tap_recognizer)
   end
 
+  def label=(label)
+    text_field.attributedPlaceholder = build_highlighted_placeholder(label)
+  end
+
+  def build_highlighted_placeholder(label)
+    NSAttributedString.alloc.initWithString(
+      label,
+      attributes: { NSForegroundColorAttributeName =>  MotionForm.button_text_color })
+  end
+
   def tap_recognizer
     UITapGestureRecognizer.alloc.initWithTarget(self, action: 'tapped:')
   end

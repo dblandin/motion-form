@@ -3,7 +3,7 @@ motion_require './cells/text_field_cell'
 
 module MotionForm
   class << self
-    attr_writer :icon_font, :section_header_color, :section_header_text_color
+    attr_writer :icon_font, :section_header_color, :section_header_text_color, :button_text_color
 
     def config
       yield self
@@ -50,6 +50,10 @@ module MotionForm
 
     def section_header_text_color
       @section_header_text_color || '#eaf0f1'.to_color
+    end
+
+    def button_text_color
+      @button_text_color || '#bdc3c7'.to_color
     end
   end
 end
