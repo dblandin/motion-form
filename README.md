@@ -10,6 +10,8 @@ It aims to bring a simple, yet flexible DSL to the tedious task of creating iOS 
 [![Code Climate](https://codeclimate.com/github/dblandin/motion-form.png)](https://codeclimate.com/github/dblandin/motion-form)
 [![Build Status](https://travis-ci.org/dblandin/motion-form.png?branch=master)](https://travis-ci.org/dblandin/motion-form)
 
+motion-form's initial development was sponsored by [dscout](https://dscout.com). Many thanks to them!
+
 ![Screenshot](https://github.com/dblandin/motion-form/blob/master/img/screenshot.png?raw=true)
 
 ## Usage
@@ -72,3 +74,7 @@ Or install it yourself as:
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
+
+## Thanks
+
+[dscout](https://dscout.com) - for their sponsorship
