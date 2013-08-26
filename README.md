@@ -6,6 +6,10 @@ motion-form is heavily inspired by the gem simple_form for Rails.
 
 It aims to bring a simple, yet flexible DSL to the tedious task of creating iOS forms.
 
+[![Gem Version](https://badge.fury.io/rb/motion-form.png)](http://badge.fury.io/rb/motion-form)
+[![Code Climate](https://codeclimate.com/github/dblandin/motion-form.png)](https://codeclimate.com/github/dblandin/motion-form)
+[![Build Status](https://travis-ci.org/dblandin/motion-form.png?branch=master)](https://travis-ci.org/dblandin/motion-form)
+
 ![Screenshot](https://github.com/dblandin/motion-form/blob/master/img/screenshot.png?raw=true)
 
 ## Usage
