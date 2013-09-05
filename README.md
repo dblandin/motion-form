@@ -34,11 +34,15 @@ form = MotionForm.form_for(view) do |f|
 end
 
 def push_email_controller
-  # push controller
+  lambda do
+    # push controller
+  end
 end
 
 def push_password_controller
-  # push controller
+  lambda do
+    # push controller
+  end
 end
 ```
 
