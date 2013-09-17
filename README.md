@@ -16,9 +16,12 @@ motion-form's initial development was sponsored by [dscout](https://dscout.com).
 
 ## Usage
 
-```ruby
-form = MotionForm.form_for(view) do |f|
-  f.section 'Profile' do |section|
+``` ruby
+form = MotionForm.form_for(view) do |form|
+  # If you don't want section header views, leave the section name blank
+  # Ex: form.section do |section|
+
+  form.section 'Profile' do |section|
     section.input :name,      icon: :contact, value: 'David Copperfield'
     section.input :username,  icon: :user
     section.input :pinterest, icon: :pinterest
@@ -27,7 +30,7 @@ form = MotionForm.form_for(view) do |f|
     section.input :bio,       icon: :info
   end
 
-  f.section 'Account' do |section|
+  form.section 'Account' do |section|
     section.button :change_email, icon: :email, action: push_email_controller
     section.button :change_password, icon: :lock, action: push_password_controller
   end
@@ -46,9 +49,31 @@ def push_password_controller
 end
 ```
 
+### Validation
+
+You can add validation rules to input fields.
+
+The following syntax is supported:
+
+``` ruby
+awesomeness_validator = lambda do |value|
+  # validate awesomeness
+end
+
+MotionForm.form_for(view) do |form|
+  form.section do |section
+    section.input :name,        required: true  # present and not blank
+    section.input :email,       email: true     # valid email address
+    section.input :website,     url: true       # valid url
+    section.input :age,         format: /^\d+$/ # matches regex
+    section.input :awesomeness, validate_with: awesomeness_validator # custom validator
+  end
+end
+```
+
 ### Configuration
 
-```ruby
+``` ruby
 MotionForm.config do |config|
   config.icon_font                 = UIFont.fontWithName('dscovr', size: 14.0)
   config.section_header_color      = UIColor.blueColor
