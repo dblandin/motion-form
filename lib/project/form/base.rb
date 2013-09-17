@@ -102,6 +102,10 @@ module MotionForm
       sections.map(&:rows).flatten
     end
 
+    def valid?
+      rows.select { |row| row.is_a? TextFieldRow }.all? { |row| row.valid? }
+    end
+
     def tableView(table_view, cellForRowAtIndexPath: index_path)
       section = sections[index_path.section]
       row     = section.rows[index_path.row]
