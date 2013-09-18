@@ -28,6 +28,8 @@ form = MotionForm.form_for(view) do |form|
     section.input :twitter,   icon: :twitter
     section.input :website,   icon: :website
     section.input :bio,       icon: :info
+
+    section.button :submit, action: submit
   end
 
   form.section 'Account' do |section|
@@ -36,15 +38,48 @@ form = MotionForm.form_for(view) do |form|
   end
 end
 
+def submit
+  -> do
+    form.render # { name:      'Devon',
+                #   username:  'dblandin',
+                #   pinterest: '',
+                #   twitter:   'dblandin',
+                #   website:   'http://github.com/dblandin',
+                #   bio:       'Rubyist in Chicago' }
+  end
+end
+
 def push_email_controller
-  lambda do
+  -> do
     # push controller
   end
 end
 
 def push_password_controller
-  lambda do
+  -> do
     # push controller
+  end
+end
+```
+
+### Rendering the Form
+
+Calling #render on any form will return a hash of it's input.
+
+Here's an example using BubbleWrap:
+
+``` ruby
+data = form.render
+
+p "Creating account for #{data[:email]}"
+
+BW::HTTP.post("http://foo.bar.com/", { payload: data }) do |response|
+  if response.ok?
+    json = BW::JSON.parse(response.body.to_str)
+
+    App.alert "Thanks for signing up #{json['display_name']}!"
+  else
+    App.alert("Login failed")
   end
 end
 ```
@@ -56,17 +91,25 @@ You can add validation rules to input fields.
 The following syntax is supported:
 
 ``` ruby
-awesomeness_validator = lambda do |value|
+awesomeness_validator = -> (value) do
   # validate awesomeness
 end
 
-MotionForm.form_for(view) do |form|
+submit = -> do
+  if @form.valid?
+    # submit form
+  end
+end
+
+@form = MotionForm.form_for(view) do |form|
   form.section do |section
     section.input :name,        required: true  # present and not blank
     section.input :email,       email: true     # valid email address
     section.input :website,     url: true       # valid url
     section.input :age,         format: /^\d+$/ # matches regex
     section.input :awesomeness, validate_with: awesomeness_validator # custom validator
+
+    section.button :submit, action: submit
   end
 end
 ```
