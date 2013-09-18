@@ -18,6 +18,8 @@ class FormController < UIViewController
         section.input :twitter,   icon: :twitter
         section.input :website,   icon: :website, validate_with: url_validator
         section.input :bio,       icon: :info
+
+        section.button :submit, action: submit
       end
 
       form.section 'Account' do |section|
@@ -27,16 +29,16 @@ class FormController < UIViewController
     end
   end
 
+  def submit
+    -> { App.alert form.valid? ? 'Form is valid' : 'Form is invalid' }
+  end
+
   def url_validator
-    lambda do |value|
-      value && value[URL_REGEX]
-    end
+    -> (value) { value && value[URL_REGEX] }
   end
 
   def notify_action
-    lambda do
-      navigationController.pushViewController(password_controller, animated: true)
-    end
+    -> { navigationController.pushViewController(password_controller, animated: true) }
   end
 
   def password_controller

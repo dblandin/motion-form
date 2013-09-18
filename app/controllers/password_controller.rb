@@ -16,8 +16,6 @@ class PasswordController < UIViewController
   end
 
   def save
-    lambda do
-      p 'saving password', form.render
-    end
+    -> { p 'saving password', form.render }
   end
 end
