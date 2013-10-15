@@ -7,6 +7,8 @@ class TextFieldCell < BaseCell
   def initWithStyle(style, reuseIdentifier: reuse_identifier)
     super.tap do |cell|
       cell.observe('ButtonCallbackWillFire', 'resign_textfield:')
+      cell.observe('FormWillValidate',       'resign_textfield:')
+      cell.observe('FormWillRender',         'resign_textfield:')
     end
   end
 

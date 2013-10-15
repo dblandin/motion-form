@@ -103,6 +103,8 @@ module MotionForm
     end
 
     def valid?
+      notification_center.postNotificationName('FormWillValidate', object: self, userInfo: nil)
+
       rows.select { |row| row.is_a? TextFieldRow }.all? { |row| row.valid? }
     end
 
@@ -116,6 +118,8 @@ module MotionForm
     end
 
     def render
+      notification_center.postNotificationName('FormWillRender', object: self, userInfo: nil)
+
       Hash[render_values]
     end
 
