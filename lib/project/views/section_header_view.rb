@@ -15,7 +15,7 @@ class SectionHeaderView < UIView
     @section_title ||= PaddedLabel.alloc.initWithFrame(bounds).tap do |label|
       label.adjustsFontSizeToFitWidth = true
       label.backgroundColor           = MotionForm.section_header_color
-      label.font                      = UIFont.fontWithName('Helvetica Neue', size: 20.0)
+      label.font                      = MotionForm.section_header_font
       label.padding                   = 10
       label.textColor                 = MotionForm.section_header_text_color
     end

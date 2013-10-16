@@ -3,7 +3,11 @@ motion_require './cells/text_field_cell'
 
 module MotionForm
   class << self
-    attr_writer :icon_font, :section_header_color, :section_header_text_color, :button_text_color
+    attr_writer :icon_font,
+                :section_header_color,
+                :section_header_text_color,
+                :section_header_font,
+                :button_text_color
 
     def config
       yield self
@@ -38,6 +42,10 @@ module MotionForm
 
     def included_cells
       [TextFieldCell, ButtonCell]
+    end
+
+    def section_header_font
+      @section_header_font || UIFont.fontWithName('HelveticaNeue-Bold', size: 14.0)
     end
 
     def icon_font
