@@ -1,11 +1,12 @@
 class BaseRow
-  attr_reader :icon, :key, :options
+  attr_reader :icon, :key, :label, :options
 
   def initialize(key, options)
     @key     = key
     @options = options
 
-    @icon  = options.fetch(:icon, nil)
+    @icon  = options.fetch(:icon,  nil)
+    @label = options.fetch(:label, key.to_s.titleize)
     @value = options.fetch(:value, nil)
   end
 
@@ -35,11 +36,7 @@ class BaseRow
 
   def update_cell(cell)
     cell.key   = key
-    cell.label = name
+    cell.label = label
     cell.icon  = icon
-  end
-
-  def name
-    key.to_s.titleize
   end
 end
