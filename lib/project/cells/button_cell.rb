@@ -46,10 +46,12 @@ class ButtonCell < TextFieldCell
     text_field.rightViewMode = UITextFieldViewModeAlways
   end
 
+  def accessory=(icon)
+    right_view.name = icon
+  end
+
   def right_view
-    @right_view ||= IconView.alloc.init.tap do |icon|
-      icon.name = :forward_arrow
-    end
+    @right_view ||= IconView.alloc.init
   end
 
   def layoutSubviews

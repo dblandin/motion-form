@@ -4,6 +4,7 @@ motion_require './cells/text_field_cell'
 module MotionForm
   class << self
     attr_writer :icon_font,
+                :icon_mapper,
                 :section_header_color,
                 :section_header_text_color,
                 :section_header_font,
@@ -50,6 +51,10 @@ module MotionForm
 
     def icon_font
       @icon_font || UIFont.fontWithName('dscovr', size: 14.0)
+    end
+
+    def icon_mapper
+      @icon_mapper || -> (icon_name) { icon_name }
     end
 
     def section_header_color

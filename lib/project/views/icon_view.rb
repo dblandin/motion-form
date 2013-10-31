@@ -13,26 +13,6 @@ class IconView < UILabel
   def name=(name)
     @name = name
 
-    self.text = hex
-  end
-
-  def hex
-    unicode ? unicode.hex.chr(Encoding::UTF_8) : ''
-  end
-
-  def unicode
-    icon_mappings[name]
-  end
-
-  def icon_mappings
-    @_icon_mappings ||= BW::JSON.parse(json_data.to_str)
-  end
-
-  def json_data
-    NSData.dataWithContentsOfFile(json_path)
-  end
-
-  def json_path
-    NSBundle.mainBundle.pathForResource('font_icons', ofType: 'json')
+    self.text = MotionForm.icon_mapper.call(name)
   end
 end

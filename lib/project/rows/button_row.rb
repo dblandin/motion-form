@@ -2,12 +2,13 @@ motion_require '../cells/button_cell'
 motion_require './text_field_row'
 
 class ButtonRow < TextFieldRow
-  attr_reader :on_tap_callback
+  attr_reader :on_tap_callback, :accessory
 
   def initialize(key, options)
     super
 
     @on_tap_callback = options.fetch(:action, lambda {})
+    @accessory       = options.fetch(:accessory, nil)
   end
 
   def cell_type
@@ -28,5 +29,11 @@ class ButtonRow < TextFieldRow
 
       on_tap_callback.call
     end
+  end
+
+  def update_cell(cell)
+    super
+
+    cell.accessory = accessory
   end
 end
