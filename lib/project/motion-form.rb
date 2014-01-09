@@ -54,7 +54,7 @@ module MotionForm
     end
 
     def icon_mapper
-      @icon_mapper || -> (icon_name) { icon_name }
+      @icon_mapper || FontIconMapper
     end
 
     def section_header_color
