@@ -13,9 +13,22 @@ module MotionForm
         f.dataSource = self
         f.delegate   = self
 
+        f.addGestureRecognizer(tap_recognizer)
+
         @keyboard_avoiding_delegate = Motion::KeyboardAvoiding.new(f)
+
         listen
       end
+    end
+
+    def tap_recognizer
+      @tap_recognizer ||= UITapGestureRecognizer.alloc.init.tap do |recognizer|
+        recognizer.addTarget(self, action: 'tapped:')
+      end
+    end
+
+    def tapped(recognizer)
+      endEditing(true)
     end
 
     def listen
