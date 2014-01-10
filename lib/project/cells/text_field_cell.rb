@@ -6,9 +6,11 @@ class TextFieldCell < BaseCell
 
   def initWithStyle(style, reuseIdentifier: reuse_identifier)
     super.tap do |cell|
-      cell.observe('ButtonCallbackWillFire', 'resign_textfield:')
-      cell.observe('FormWillValidate',       'resign_textfield:')
-      cell.observe('FormWillRender',         'resign_textfield:')
+      cell.observe('ButtonCallbackWillFire', 'resign_text_view:')
+      cell.observe('FormWillValidate',       'resign_text_view:')
+      cell.observe('FormWillRender',         'resign_text_view:')
+
+      cell.setup_constraints
     end
   end
 
@@ -18,69 +20,89 @@ class TextFieldCell < BaseCell
     end
   end
 
-  def resign_textfield(notification)
-    text_field.resignFirstResponder if text_field.isFirstResponder
+  def setup_constraints
+    Motion::Layout.new do |layout|
+      layout.view       contentView
+      layout.subviews   'text_view' => text_view
+      layout.horizontal '|[text_view]|'
+      layout.vertical   '|[text_view]|'
+    end
+  end
+
+  def resign_text_view(notification)
+    text_view.resignFirstResponder if text_view.isFirstResponder
   end
 
   def label=(label)
-    text_field.placeholder = label
   end
 
   def secure=(secure)
-    text_field.secureTextEntry = secure
   end
 
   def icon=(icon)
     left_view.name = icon
   end
 
-  def text_field
-    @text_field ||= UITextField.alloc.init.tap do |field|
-      field.autocorrectionType       = UITextAutocorrectionTypeNo
-      field.autoresizingMask         = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight
-      field.backgroundColor          = UIColor.clearColor
-      field.clearButtonMode          = UITextFieldViewModeWhileEditing
-      field.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter
-      field.leftView                 = left_view
-      field.leftViewMode             = UITextFieldViewModeAlways
-      field.textColor                = UIColor.grayColor
-
-      field.delegate = self
+  def text_view
+    @text_view ||= SZTextView.alloc.init.tap do |text_view|
+      text_view.font         = UIFont.fontWithName('HelveticaNeue-Light', size: 14.0)
+      text_view.placeholder  = 'Write a short bio'
+      text_view.delegate     = self
     end
   end
+  alias_method :text_field, :text_view
 
   def left_view
     @left_view ||= IconView.alloc.init
   end
 
   def value
-    text_field.text
+    text_view.text
   end
 
   def value=(value)
-    text_field.text = value
+    text_view.text = value
   end
 
-  def layoutSubviews
-    text_field.frame = [[10, 0], [300, 43]]
-    left_view.frame  = [[0, 0], [36, 43]]
-  end
-
-  def textFieldDidBeginEditing(text_field)
+  def textViewDidBeginEditing(text_view)
     post('FormCellDidBeginEditing', notification_payload)
   end
 
-  def textFieldDidEndEditing(text_field)
+  def textViewDidEndEditing(text_view)
     post('FormCellDidEndEditing', notification_payload)
   end
 
-  def textFieldShouldReturn(text_field)
-    text_field.resignFirstResponder
+  def textFieldShouldReturn(text_view)
+    text_view.resignFirstResponder
 
     true
   end
 
+  def textView(text_view, shouldChangeTextInRange: range, replacementText: text)
+    if text == "\n"
+      text_view.resignFirstResponder
+
+      false
+    else
+      true
+    end
+  end
+
+  def textViewDidChange(text_view)
+    line     = text_view.caretRectForPosition(text_view.selectedTextRange.start)
+    overflow = line.origin.y + line.size.height - (text_view.contentOffset.y + text_view.bounds.size.height - text_view.contentInset.bottom - text_view.contentInset.top )
+
+    if overflow > 0
+      offset = text_view.contentOffset
+      offset.y += overflow + 7
+
+      UIView.animateWithDuration(0.2, animations: -> {
+        text_view.setContentOffset(offset)
+      })
+    end
+  end
+
   def notification_payload
-    { key: key, value: value, text_field: text_field }
+    { key: key, value: value, text_field: text_view }
   end
 end

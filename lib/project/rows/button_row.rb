@@ -1,7 +1,7 @@
 motion_require '../cells/button_cell'
 motion_require './text_field_row'
 
-class ButtonRow < TextFieldRow
+class ButtonRow < TextInputRow
   attr_reader :on_tap_callback, :accessory
 
   def initialize(key, options)

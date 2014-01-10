@@ -42,7 +42,7 @@ module MotionForm
     end
 
     def included_cells
-      [TextFieldCell, ButtonCell]
+      [TextInputCell, TextFieldCell, ButtonCell]
     end
 
     def section_header_font

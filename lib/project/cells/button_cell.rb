@@ -1,6 +1,6 @@
 motion_require './text_field_cell'
 
-class ButtonCell < TextFieldCell
+class ButtonCell < TextInputCell
   IDENTIFIER = 'ButtonCell'
 
   class << self

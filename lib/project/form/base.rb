@@ -91,6 +91,13 @@ module MotionForm
       row     = section.rows[index_path.row]
     end
 
+    def tableView(table_view, heightForRowAtIndexPath: index_path)
+      section = sections[index_path.section]
+      row     = section.rows[index_path.row]
+
+      row.respondsToSelector('height') ? row.height : 44
+    end
+
     def tableView(table_view, viewForHeaderInSection: section)
       unless sections[section].title.blank?
         SectionHeaderView.alloc.initWithFrame([[0, 0], [size.width, 44.0]]).tap do |header|
@@ -118,7 +125,7 @@ module MotionForm
     def valid?
       notification_center.postNotificationName('FormWillValidate', object: self, userInfo: nil)
 
-      rows.select { |row| row.is_a? TextFieldRow }.all? { |row| row.valid? }
+      rows.select { |row| row.is_a? TextInputRow }.all? { |row| row.valid? }
     end
 
     def tableView(table_view, cellForRowAtIndexPath: index_path)

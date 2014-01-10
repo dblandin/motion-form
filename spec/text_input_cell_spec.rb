@@ -1,6 +1,6 @@
-describe TextFieldCell do
+describe TextInputCell do
   before do
-    @cell = TextFieldCell.alloc.init
+    @cell = TextInputCell.alloc.init
   end
 
   describe '#label=' do

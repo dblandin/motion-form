@@ -10,7 +10,7 @@ describe MotionForm do
   end
 
   it 'knows about all of the included cells' do
-    expected_cells = [TextFieldCell, ButtonCell]
+    expected_cells = [TextInputCell, TextFieldCell, ButtonCell]
 
     MotionForm.included_cells.should.equal expected_cells
   end

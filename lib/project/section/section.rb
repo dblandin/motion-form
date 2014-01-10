@@ -10,6 +10,10 @@ class MotionForm
     end
 
     def input(key, options = {})
+      rows << TextInputRow.new(key, options)
+    end
+
+    def text(key, options = {})
       rows << TextFieldRow.new(key, options)
     end
 

@@ -7,4 +7,8 @@ Bundler.require
 
 Motion::Project::App.setup do |app|
   app.name = 'motion-form'
+
+  app.pods do
+    pod 'SZTextView', '~> 1.1.0'
+  end
 end

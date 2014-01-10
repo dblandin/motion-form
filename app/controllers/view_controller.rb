@@ -17,9 +17,12 @@ class FormController < UIViewController
         section.input :pinterest, icon: :pinterest
         section.input :twitter,   icon: :twitter
         section.input :website,   icon: :earth, validate_with: url_validator
-        section.input :bio,       icon: :info
 
         section.button :submit, action: submit
+      end
+
+      form.section 'Bio' do |section|
+        section.text  :bio, icon: :info
       end
 
       form.section 'Account' do |section|
