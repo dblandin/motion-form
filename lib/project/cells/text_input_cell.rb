@@ -80,6 +80,12 @@ class TextInputCell < BaseCell
     true
   end
 
+  def capitalize=(bool)
+    option = bool ? UITextAutocapitalizationTypeSentences : UITextAutocapitalizationTypeNone
+
+    text_field.autocapitalizationType = option
+  end
+
   def notification_payload
     { key: key, value: value, text_field: text_field }
   end

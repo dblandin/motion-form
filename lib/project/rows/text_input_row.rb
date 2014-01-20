@@ -60,8 +60,13 @@ class TextInputRow < BaseRow
   def update_cell(cell)
     super
 
-    cell.secure = options[:secure]
-    cell.value  = options[:value]
+    cell.secure     = options[:secure]
+    cell.value      = options[:value]
+    cell.capitalize = capitalize?
+  end
+
+  def capitalize?
+    options[:capitalize] || !(options[:email] || options[:secure])
   end
 
   def cell_type
