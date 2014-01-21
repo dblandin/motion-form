@@ -27,7 +27,7 @@ form = MotionForm.form_for(view) do |form|
     section.input :pinterest, icon: :pinterest
     section.input :twitter,   icon: :twitter
     section.input :website,   icon: :website
-    section.input :bio,       icon: :info
+    section.text  :bio,       placeholder: 'Write a short bio...'
 
     section.button :submit, action: submit
   end

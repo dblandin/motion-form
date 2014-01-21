@@ -9,4 +9,10 @@ class TextFieldRow < TextInputRow
   def height
     100
   end
+
+  def update_cell(cell)
+    super
+
+    cell.placeholder = options.fetch(:placeholder, 'Write something...')
+  end
 end

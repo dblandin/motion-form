@@ -7,7 +7,7 @@ class FormController < UIViewController
     super
 
     view.backgroundColor = UIColor.whiteColor
-    self.title = 'Settings'
+    self.title = 'Me'
 
     @form = MotionForm.form_for(view) do |form|
       form.section 'Profile' do |section|
@@ -22,7 +22,7 @@ class FormController < UIViewController
       end
 
       form.section 'Bio' do |section|
-        section.text  :bio, icon: :info
+        section.text  :bio, placeholder: 'Write a short bio...'
       end
 
       form.section 'Account' do |section|

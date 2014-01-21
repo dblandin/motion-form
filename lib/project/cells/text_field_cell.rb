@@ -36,6 +36,10 @@ class TextFieldCell < BaseCell
   def label=(label)
   end
 
+  def placeholder=(placeholder)
+    text_view.placeholder = placeholder
+  end
+
   def secure=(secure)
   end
 
@@ -45,9 +49,8 @@ class TextFieldCell < BaseCell
 
   def text_view
     @text_view ||= SZTextView.alloc.init.tap do |text_view|
-      text_view.font         = UIFont.fontWithName('HelveticaNeue-Light', size: 14.0)
-      text_view.placeholder  = 'Write a short bio'
-      text_view.delegate     = self
+      text_view.font     = UIFont.fontWithName('HelveticaNeue-Light', size: 14.0)
+      text_view.delegate = self
     end
   end
   alias_method :text_field, :text_view
