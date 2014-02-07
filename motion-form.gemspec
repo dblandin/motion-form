@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 Gem::Specification.new do |spec|
   spec.name          = 'motion-form'
-  spec.version       = '0.4.0'
+  spec.version       = '0.5.0'
   spec.authors       = ['Devon Blandin']
   spec.email         = ['dblandin@gmail.com']
   spec.description   = %q{RubyMotion Forms made easy.}
