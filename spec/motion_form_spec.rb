@@ -1,14 +1,4 @@
 describe MotionForm do
-  it 'allows configuration' do
-    font = UIFont.fontWithName('Helvetica', size: 14)
-
-    MotionForm.config do |config|
-      config.icon_font = font
-    end
-
-    MotionForm.icon_font.should.equal font
-  end
-
   it 'knows about all of the included cells' do
     expected_cells = [TextInputCell, TextFieldCell, ButtonCell]
 

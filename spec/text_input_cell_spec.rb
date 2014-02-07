@@ -5,17 +5,9 @@ describe TextInputCell do
 
   describe '#label=' do
     it 'sets the text field placeholder' do
-      @cell.label = :email
+      @cell.label = 'Email'
 
-      @cell.text_field.placeholder.should.equal 'email'
-    end
-  end
-
-  describe '#icon=' do
-    it 'sets the icon view name' do
-      @cell.icon = :website
-
-      @cell.left_view.name.should.equal :website
+      @cell.text_label.text.should.equal 'Email'
     end
   end
 end
