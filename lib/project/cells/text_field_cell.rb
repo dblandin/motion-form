@@ -1,5 +1,4 @@
 motion_require './base_cell'
-motion_require '../views/icon_view'
 
 class TextFieldCell < BaseCell
   IDENTIFIER = 'TextFieldCell'
@@ -43,10 +42,6 @@ class TextFieldCell < BaseCell
   def secure=(secure)
   end
 
-  def icon=(icon)
-    left_view.name = icon
-  end
-
   def text_view
     @text_view ||= SZTextView.alloc.init.tap do |text_view|
       text_view.font     = UIFont.fontWithName('HelveticaNeue-Light', size: 14.0)
@@ -54,10 +49,6 @@ class TextFieldCell < BaseCell
     end
   end
   alias_method :text_field, :text_view
-
-  def left_view
-    @left_view ||= IconView.alloc.init
-  end
 
   def value
     text_view.text

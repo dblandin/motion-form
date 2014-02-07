@@ -12,11 +12,30 @@ class ButtonCell < TextInputCell
   def initWithStyle(style, reuseIdentifier: reuse_identifier)
     super.tap do |cell|
       cell.selectionStyle     = UITableViewCellSelectionStyleGray
+      cell.accessoryType      = UITableViewCellAccessoryDisclosureIndicator
       cell.text_field.enabled = false
 
-      cell.add_right_view
+      cell.text_label.textColor = MotionForm.button_text_color
+
       cell.add_tap_recognizer
     end
+  end
+
+  def setup_constraints
+    text_label.translatesAutoresizingMaskIntoConstraints = false
+    contentView.addSubview(text_label)
+
+    contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(
+      'H:|-margin-[label]-margin-|',
+      options: NSLayoutFormatAlignAllCenterY,
+      metrics: { 'margin' => 10 },
+      views:   subviews_dict))
+
+    contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(
+      'V:|[label]|',
+      options: 0,
+      metrics: {},
+      views:   subviews_dict))
   end
 
   def add_tap_recognizer
@@ -24,13 +43,7 @@ class ButtonCell < TextInputCell
   end
 
   def label=(label)
-    text_field.attributedPlaceholder = build_highlighted_placeholder(label)
-  end
-
-  def build_highlighted_placeholder(label)
-    NSAttributedString.alloc.initWithString(
-      label,
-      attributes: { NSForegroundColorAttributeName =>  MotionForm.button_text_color })
+    text_label.text = label
   end
 
   def tap_recognizer
@@ -39,25 +52,6 @@ class ButtonCell < TextInputCell
 
   def tapped(recognizer)
     post('FormCellWasTapped', notification_payload)
-  end
-
-  def add_right_view
-    text_field.rightView     = right_view
-    text_field.rightViewMode = UITextFieldViewModeAlways
-  end
-
-  def accessory=(icon)
-    right_view.name = icon
-  end
-
-  def right_view
-    @right_view ||= IconView.alloc.init
-  end
-
-  def layoutSubviews
-    super
-
-    right_view.frame = [[size.width - 56, 0], [36, 43]]
   end
 
   def notification_payload

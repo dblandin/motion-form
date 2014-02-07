@@ -1,15 +1,46 @@
 motion_require './base_cell'
-motion_require '../views/icon_view'
 
 class TextInputCell < BaseCell
   IDENTIFIER = 'TextInputCell'
 
   def initWithStyle(style, reuseIdentifier: reuse_identifier)
     super.tap do |cell|
+      cell.setup_constraints
+
       cell.observe('ButtonCallbackWillFire', 'resign_textfield:')
       cell.observe('FormWillValidate',       'resign_textfield:')
       cell.observe('FormWillRender',         'resign_textfield:')
     end
+  end
+
+  def setup_constraints
+    [text_label, text_field].each do |subview|
+      subview.translatesAutoresizingMaskIntoConstraints = false
+      contentView.addSubview(subview)
+    end
+
+    contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(
+      'H:|-margin-[label(100@1000)][input]-margin-|',
+      options: NSLayoutFormatAlignAllCenterY,
+      metrics: { 'margin' => 10 },
+      views:   subviews_dict))
+
+    contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(
+      'V:|[label]|',
+      options: 0,
+      metrics: {},
+      views:   subviews_dict))
+
+    contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(
+      'V:|[input]|',
+      options: 0,
+      metrics: {},
+      views:   subviews_dict))
+  end
+
+  def subviews_dict
+    { 'label' => text_label,
+      'input' => text_field }
   end
 
   class << self
@@ -23,34 +54,35 @@ class TextInputCell < BaseCell
   end
 
   def label=(label)
-    text_field.placeholder = label
+    text_label.text = label
   end
 
   def secure=(secure)
     text_field.secureTextEntry = secure
   end
 
-  def icon=(icon)
-    left_view.name = icon
+  def placeholder=(placeholder)
+    text_field.placeholder = placeholder
   end
 
   def text_field
     @text_field ||= UITextField.alloc.init.tap do |field|
       field.autocorrectionType       = UITextAutocorrectionTypeNo
-      field.autoresizingMask         = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight
       field.backgroundColor          = UIColor.clearColor
       field.clearButtonMode          = UITextFieldViewModeWhileEditing
       field.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter
-      field.leftView                 = left_view
-      field.leftViewMode             = UITextFieldViewModeAlways
-      field.textColor                = UIColor.grayColor
+      field.textColor                = UIColor.darkGrayColor
+      field.font                     = UIFont.fontWithName('HelveticaNeue-Light', size: 16.0)
 
       field.delegate = self
     end
   end
 
-  def left_view
-    @left_view ||= IconView.alloc.init
+  def text_label
+    @text_label ||= UILabel.alloc.init.tap do |label|
+      label.textColor = UIColor.darkGrayColor
+      label.font      = UIFont.fontWithName('HelveticaNeue-Light', size: 18.0)
+    end
   end
 
   def value
@@ -59,11 +91,6 @@ class TextInputCell < BaseCell
 
   def value=(value)
     text_field.text = value
-  end
-
-  def layoutSubviews
-    text_field.frame = [[10, 0], [300, 43]]
-    left_view.frame  = [[0, 0], [36, 43]]
   end
 
   def textFieldDidBeginEditing(text_field)

@@ -3,9 +3,7 @@ motion_require './cells/text_field_cell'
 
 module MotionForm
   class << self
-    attr_writer :icon_font,
-                :icon_mapper,
-                :section_header_color,
+    attr_writer :section_header_color,
                 :section_header_text_color,
                 :section_header_font,
                 :button_text_color
@@ -46,27 +44,19 @@ module MotionForm
     end
 
     def section_header_font
-      @section_header_font || UIFont.fontWithName('HelveticaNeue-Bold', size: 14.0)
-    end
-
-    def icon_font
-      @icon_font || UIFont.fontWithName('dscovr', size: 14.0)
-    end
-
-    def icon_mapper
-      @icon_mapper || FontIconMapper
+      @section_header_font || UIFont.fontWithName('HelveticaNeue', size: 14.0)
     end
 
     def section_header_color
-      @section_header_color || '#bac3c7'.to_color
+      @section_header_color || '#EFEFF4'.to_color
     end
 
     def section_header_text_color
-      @section_header_text_color || '#eaf0f1'.to_color
+      @section_header_text_color || '#232323'.to_color
     end
 
     def button_text_color
-      @button_text_color || '#bdc3c7'.to_color
+      @button_text_color || '#232323'.to_color
     end
   end
 end

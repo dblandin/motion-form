@@ -6,17 +6,18 @@ class FormController < UIViewController
   def viewDidLoad
     super
 
-    view.backgroundColor = UIColor.whiteColor
+    view.backgroundColor = '#EFEFF4'.to_color
     self.title = 'Me'
 
     @form = MotionForm.form_for(view) do |form|
+      form.backgroundColor = '#EFEFF4'.to_color
       form.section 'Profile' do |section|
-        section.input :name,      icon: :contact, required: true
-        section.input :username,  icon: :contact, required: true
-        section.input :email,     icon: :email,   email: true
-        section.input :pinterest, icon: :pinterest
-        section.input :twitter,   icon: :twitter
-        section.input :website,   icon: :earth, validate_with: url_validator
+        section.input :name, required: true
+        section.input :username, required: true
+        section.input :email, email: true
+        section.input :pinterest
+        section.input :twitter
+        section.input :website, placeholder: 'Personal blog or website', validate_with: url_validator
 
         section.button :submit, action: submit
       end
@@ -26,8 +27,8 @@ class FormController < UIViewController
       end
 
       form.section 'Account' do |section|
-        section.button :change_password, icon: :lock,  action: notify_action
-        section.button :change_email,    icon: :email, action: notify_action
+        section.button :change_password, action: notify_action
+        section.button :change_email, action: notify_action
       end
     end
   end
