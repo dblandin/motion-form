@@ -9,8 +9,7 @@ class BaseCell < UITableViewCell
 
   def initWithStyle(style, reuseIdentifier: reuse_identifier)
     super.tap do |cell|
-      cell.selectionStyle = UITableViewCellSelectionStyleNone
-      cell.contentView.addSubview(text_field)
+      cell.selectionStyle         = UITableViewCellSelectionStyleNone
       cell.selectedBackgroundView = selected_background_view
     end
   end

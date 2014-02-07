@@ -9,7 +9,7 @@ class PasswordController < UIViewController
     @form = MotionForm.form_for(view) do |f|
       f.section 'Change Password' do |section|
         section.input :password, icon: :lock
-        section.input :password_confirmation, icon: :lock
+        section.input :password_confirmation, label: 'Confirm', icon: :lock
         section.button :save, action: save
       end
     end
