@@ -22,19 +22,19 @@ form = MotionForm.form_for(view) do |form|
   # Ex: form.section do |section|
 
   form.section 'Profile' do |section|
-    section.input :name,      icon: :contact, value: 'David Copperfield'
-    section.input :username,  icon: :user
-    section.input :pinterest, icon: :pinterest
-    section.input :twitter,   icon: :twitter
-    section.input :website,   icon: :website
+    section.input :name,      label: 'Your name', value: 'David Copperfield'
+    section.input :username,  label: 'A username'
+    section.input :pinterest, label: 'Pinterest username'
+    section.input :twitter,   label: 'Twitter username'
+    section.input :website,   label: 'Personal website'
     section.text  :bio,       placeholder: 'Write a short bio...'
 
     section.button :submit, action: submit
   end
 
   form.section 'Account' do |section|
-    section.button :change_email, icon: :email, action: push_email_controller
-    section.button :change_password, icon: :lock, action: push_password_controller
+    section.button :change_email, action: push_email_controller
+    section.button :change_password, action: push_password_controller
   end
 end
 
@@ -118,7 +118,6 @@ end
 
 ``` ruby
 MotionForm.config do |config|
-  config.icon_font                 = UIFont.fontWithName('dscovr', size: 14.0)
   config.section_header_color      = UIColor.blueColor
   config.section_header_text_color = UIColor.whiteColor
   config.button_text_color         = UIColor.redColor

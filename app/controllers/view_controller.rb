@@ -12,12 +12,11 @@ class FormController < UIViewController
     @form = MotionForm.form_for(view) do |form|
       form.backgroundColor = '#EFEFF4'.to_color
       form.section 'Profile' do |section|
-        section.input :name, required: true
-        section.input :username, required: true
-        section.input :email, email: true
-        section.input :pinterest
-        section.input :twitter
-        section.input :website, placeholder: 'Personal blog or website', validate_with: url_validator
+        section.input :name,      label: 'Full Name', placeholder: 'Your name', value: 'David Copperfield'
+        section.input :username,  placeholder: 'A username'
+        section.input :pinterest, placeholder: 'Pinterest username'
+        section.input :twitter,   placeholder: 'Twitter username'
+        section.input :website,   placeholder: 'Personal blog or website', validate_with: url_validator
 
         section.button :submit, action: submit
       end
