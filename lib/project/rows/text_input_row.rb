@@ -10,6 +10,8 @@ class TextInputRow < BaseRow
   def initialize(key, options)
     super
 
+    @value = options.fetch(:value, nil)
+
     setup_validation
 
     listen
@@ -50,18 +52,14 @@ class TextInputRow < BaseRow
   end
 
   def did_end_editing(notification)
-    self.value = notification.userInfo[:value] if notification.userInfo[:key] == key
-  end
-
-  def textFieldDidEndEditing(text_field)
-    self.value = text_field.text
+    @value = notification.userInfo[:value] if notification.userInfo[:key] == key
   end
 
   def update_cell(cell)
     super
 
     cell.secure     = options[:secure]
-    cell.value      = options[:value]
+    cell.value      = value
     cell.capitalize = capitalize?
   end
 

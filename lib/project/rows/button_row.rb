@@ -28,6 +28,5 @@ class ButtonRow < TextInputRow
 
   def update_cell(cell)
     super
-
   end
 end

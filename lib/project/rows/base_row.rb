@@ -6,7 +6,6 @@ class BaseRow
     @options = options
 
     @label = options.fetch(:label, key.to_s.titleize)
-    @value = options.fetch(:value, nil)
   end
 
   def notification_center

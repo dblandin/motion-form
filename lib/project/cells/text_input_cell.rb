@@ -16,6 +16,7 @@ class TextInputCell < BaseCell
   def setup_constraints
     [text_label, text_field].each do |subview|
       subview.translatesAutoresizingMaskIntoConstraints = false
+
       contentView.addSubview(subview)
     end
 

@@ -3,11 +3,11 @@ describe TextInputCell do
     @cell = TextInputCell.alloc.init
   end
 
-  describe '#label=' do
+  describe '#placeholder=' do
     it 'sets the text field placeholder' do
-      @cell.label = 'Email'
+      @cell.placeholder = :email
 
-      @cell.text_label.text.should.equal 'Email'
+      @cell.text_field.placeholder.should.equal 'email'
     end
   end
 end
