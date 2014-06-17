@@ -1,3 +1,5 @@
+motion_require '../motion_form'
+
 module MotionForm
   class FormController < UIViewController
     attr_reader :form

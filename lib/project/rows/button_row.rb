@@ -1,5 +1,5 @@
+motion_require './text_input_row'
 motion_require '../cells/button_cell'
-motion_require './text_field_row'
 
 class ButtonRow < TextInputRow
   attr_reader :on_tap_callback

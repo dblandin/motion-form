@@ -1,4 +1,4 @@
-motion_require './base_row'
+motion_require './text_input_row'
 motion_require '../cells/text_field_cell'
 
 class TextFieldRow < TextInputRow

@@ -1,3 +1,5 @@
+motion_require '../motion_form'
+motion_require '../section/section'
 motion_require '../views/section_header_view'
 
 module MotionForm

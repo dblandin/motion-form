@@ -1,6 +1,3 @@
-motion_require './cells/button_cell'
-motion_require './cells/text_field_cell'
-
 module MotionForm
   class << self
     attr_writer :section_header_color,
