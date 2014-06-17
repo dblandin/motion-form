@@ -27,7 +27,6 @@ class FormController < UIViewController
 
       form.section 'Account' do |section|
         section.button :change_password, action: notify_action
-        section.button :change_email, action: notify_action
       end
     end
   end
