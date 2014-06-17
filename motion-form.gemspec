@@ -19,8 +19,8 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'motion-keyboard-avoiding', '>= 0.0.2'
   spec.add_dependency 'motion-require',           '>= 0.0.3'
-  spec.add_dependency 'cocoapods',                '>= 0.27.1'
-  spec.add_dependency 'motion-cocoapods',         '>= 1.3.7'
+  spec.add_dependency 'cocoapods',                '>= 0.32.1'
+  spec.add_dependency 'motion-cocoapods',         '>= 1.4.0'
   spec.add_dependency 'motion-layout',            '>= 0.0.1'
   spec.add_development_dependency 'rake'
 end
