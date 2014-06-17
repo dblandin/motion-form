@@ -3,6 +3,7 @@ language: objective-c
 rvm:
 - 1.9.3
 before_install:
-- gem update cocoapods
-bundler_args: --binstubs --without development
+  - sudo mkdir -p /Users/travis/Library/RubyMotion/build
+  - sudo chmod -R 664 /Users/travis/Library/RubyMotion/build
+  - bundle install && rake pod:install
 script: rake spec
